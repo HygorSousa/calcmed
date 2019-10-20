@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Calculadora ROL</title>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+    <h:outputStylesheet name="theme.css" library="primefaces-start"/>
+</h:head>
+
+<h:body>
+    <div class="ui-g ui-fluid">
+        <h:form id="form" styleClass="ui-g-12">
+            <div class="card card-w-title">
+                <h1>Calculadora Rol</h1>
+                <p:outputPanel id="gridAdd">
+                    <p:panelGrid layout="grid" columns="2" styleClass="ui-panelgrid-blank form-group">
+                    <h:panelGroup>
+                            Valor: <p:inputText id="inputValor" value="#{calculadoraRolController.valor}"/>
+                        </h:panelGroup>
+                        <h:panelGroup style="justify-content: center; display: flex;">
+                            <p:commandButton value="Adicionar Valor" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraRolController.addValor}"
+                                             process="gridAdd" update="valores"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </p:outputPanel>
+                <br/>
+                <p:outputPanel id="valores" style="font-size: xx-large; text-align: center;">
+                    <h:outputText value="#{calculadoraRolController.valores}"/>
+                </p:outputPanel>
+                <br/>
+                <p:outputPanel style="font-size: large; text-align: center;">
+                    <p:panelGrid layout="grid" columns="3" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup>
+                            <p:commandButton value="Calcular Média" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraRolController.getMedArit}"
+                                             process="@this" update="panelResult"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <p:commandButton value="Calcular Mediana" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraRolController.getCalcMediana}"
+                                             process="@this" update="panelResult"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <p:commandButton value="Calcular Moda" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraRolController.getModa}"
+                                             process="@this" update="panelResult"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </p:outputPanel>
+                <br/>
+                <p:outputPanel id="panelResult">
+                    <p:panelGrid layout="grid" columns="3" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup>
+                            Média Aritimética: <h:outputText value="#{calculadoraRolController.mediaArit}"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            Mediana: <h:outputText value="#{calculadoraRolController.mediana}"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            Moda: <h:outputText value="0.0"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </p:outputPanel>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+
+</html>

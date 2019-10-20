@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Calculadora Classe</title>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+    <h:outputStylesheet name="theme.css" library="primefaces-start"/>
+</h:head>
+
+<h:body>
+    <div class="ui-g ui-fluid">
+        <h:form id="form" styleClass="ui-g-12">
+            <div class="card card-w-title">
+                <h1>Calculadora de Classe</h1>
+                <p:outputPanel id="gridAdd">
+                    <p:fieldset legend="Classe">
+                        <p:panelGrid layout="grid" columns="3" styleClass="ui-panelgrid-blank form-group">
+                            <h:panelGroup>
+                                Mínimo: <p:inputText id="inputMinimo" required="true"
+                                                     value="#{calculadoraClasseController.classe.minimo}"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                Máximo: <p:inputText id="inputMaximo" required="true"
+                                                     value="#{calculadoraClasseController.classe.maximo}"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                Frequência: <p:inputText id="inputFreq" required="true"
+                                                         value="#{calculadoraClasseController.classe.frequencia}"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+                        <br/>
+                        <p:outputPanel style="text-align: center">
+                            <p:commandButton value="Adicionar Classe" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraClasseController.addClasse}"
+                                             process="gridAdd" update="gridAdd,dtClasse, msgs"/>
+                        </p:outputPanel>
+                    </p:fieldset>
+                </p:outputPanel>
+                <br/>
+                <p:outputPanel id="dtClasse">
+                    <p:dataTable var="classe" value="#{calculadoraClasseController.classes}">
+                        <p:column headerText="Min.">
+                            <h:outputText value="#{classe.minimo}"/>
+                        </p:column>
+
+                        <p:column headerText="Max.">
+                            <h:outputText value="#{classe.maximo}"/>
+                        </p:column>
+
+                        <p:column headerText="Freq.">
+                            <h:outputText value="#{classe.frequencia}"/>
+                        </p:column>
+
+                        <p:column headerText="PMi">
+                            <h:outputText value="#{classe.pmi}"/>
+                        </p:column>
+
+                        <p:column headerText="Freq. Acum.">
+                            <h:outputText value="#{classe.frequenciaAcumulada}"/>
+                        </p:column>
+
+                        <p:column headerText="Freq. Rel.">
+                            <h:outputText value="#{classe.frequenciaRelativa}">
+                                <f:convertNumber currencySymbol="%" type="percent"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+                <br/>
+                <p:outputPanel style="text-align: center">
+                    <p:panelGrid layout="grid" columns="3" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup style="text-align: center">
+                            <p:commandButton value="Calcular Média" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraClasseController.getMediaClasse}"
+                                             process="@this"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup style="text-align: center">
+                            <p:commandButton value="Calcular Mediana" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraClasseController.getMedianaClasse}"
+                                             process="@this"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup style="text-align: center">
+                            <p:commandButton value="Calcular Moda" icon="pi pi-plus" style="width: auto"
+                                             actionListener="#{calculadoraClasseController.getModaClasse}"
+                                             process="@this"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </p:outputPanel>
+                <p:growl id="msgs" showDetail="true" showSummary="false"
+                         sticky="false" life="10000">
+                    <p:autoUpdate/>
+                </p:growl>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+
+</html>
